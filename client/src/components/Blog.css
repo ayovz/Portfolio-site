@@ -1,0 +1,25 @@
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.blog-card { overflow: hidden; }
+.blog-cover { height: 180px; overflow: hidden; }
+.blog-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.blog-card:hover .blog-cover img { transform: scale(1.05); }
+.blog-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.blog-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.blog-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.blog-excerpt { font-size: 0.88rem; color: #94A3B8; line-height: 1.65; }
+.blog-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto; padding-top: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.blog-date { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: #64748B; }
+.blog-read-link {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 0.85rem; font-weight: 600; color: #6366F1;
+  transition: gap 0.2s ease;
+}
+.blog-read-link:hover { gap: 0.6rem; }
