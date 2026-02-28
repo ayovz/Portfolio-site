@@ -13,6 +13,7 @@ const updateProfile = async (req, res) => {
   if (req.file) data.avatar = `/uploads/${req.file.filename}`;
   if (typeof data.skills === 'string') data.skills = JSON.parse(data.skills);
   if (typeof data.socials === 'string') data.socials = JSON.parse(data.socials);
+  if (typeof data.techStrip === 'string') data.techStrip = JSON.parse(data.techStrip);
   Object.assign(profile, data);
   const updated = await profile.save();
   res.json(updated);

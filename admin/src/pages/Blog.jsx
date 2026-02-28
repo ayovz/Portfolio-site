@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import adminApi from '../api';
 
-const emptyForm = { title: '', slug: '', excerpt: '', content: '', tags: '', published: false };
+const emptyForm = { title: '', slug: '', excerpt: '', content: '', tags: '', mediumLink: '', published: false };
 
 export default function Blog() {
   const [items, setItems] = useState([]);
@@ -21,7 +21,7 @@ export default function Blog() {
   const openAdd = () => { setEditing(null); setForm(emptyForm); setCoverFile(null); setError(''); setModal(true); };
   const openEdit = (item) => {
     setEditing(item);
-    setForm({ title: item.title, slug: item.slug || '', excerpt: item.excerpt || '', content: item.content || '', tags: item.tags?.join(', ') || '', published: item.published || false });
+    setForm({ title: item.title, slug: item.slug || '', excerpt: item.excerpt || '', content: item.content || '', tags: item.tags?.join(', ') || '', mediumLink: item.mediumLink || '', published: item.published || false });
     setCoverFile(null); setError(''); setModal(true);
   };
 
@@ -92,6 +92,7 @@ export default function Blog() {
                   <div className="form-group"><label className="form-label">Tags (comma-separated)</label><input className="form-input" value={form.tags} onChange={e => setForm(p => ({...p, tags: e.target.value}))} /></div>
                 </div>
                 <div className="form-group"><label className="form-label">Excerpt</label><textarea className="form-textarea" style={{ minHeight: 70 }} value={form.excerpt} onChange={e => setForm(p => ({...p, excerpt: e.target.value}))} /></div>
+                <div className="form-group"><label className="form-label">Medium Link</label><input className="form-input" type="url" placeholder="https://medium.com/@username/article" value={form.mediumLink} onChange={e => setForm(p => ({...p, mediumLink: e.target.value}))} /></div>
                 <div className="form-group">
                   <label className="form-label">Content</label>
                   <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '0.5rem', overflow: 'hidden', border: '1.5px solid var(--border)' }}>

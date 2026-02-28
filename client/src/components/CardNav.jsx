@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { GoArrowUpRight } from 'react-icons/go';
 import './CardNav.css';
@@ -77,11 +78,26 @@ const CardNav = ({ logoText = 'Portfolio', items = [], onContactClick }) => {
     }
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleLinkClick = (href) => {
+    // Determine if we need to navigate or just scroll
     if (href.startsWith('#')) {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      } else {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+       navigate(href);
     }
+
     // Close menu
     setIsHamburgerOpen(false);
     tlRef.current?.eventCallback('onReverseComplete', () => setIsExpanded(false));

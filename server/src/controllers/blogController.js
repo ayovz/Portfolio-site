@@ -16,22 +16,48 @@ const getPostBySlug = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const data = { ...req.body };
-  if (req.file) data.coverImage = `/uploads/${req.file.filename}`;
-  if (typeof data.tags === 'string') data.tags = data.tags.split(',').map(t => t.trim());
-  const post = await BlogPost.create(data);
-  res.status(201).json(post);
+  try {
+    const data = { ...req.body };
+    if (req.file) data.coverImage = `/uploads/${req.file.filename}`;
+    if (typeof data.tags === 'string') data.tags = data.tags.split(',').map(t => t.trim());
+    
+    // Auto-generate slug and publishedAt
+    if (!data.slug && data.title) {
+      data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+    if (data.published === 'true' || data.published === true) {
+      data.publishedAt = new Date();
+    }
+    
+    const post = await BlogPost.create(data);
+    res.status(201).json(post);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const updatePost = async (req, res) => {
-  const post = await BlogPost.findById(req.params.id);
-  if (!post) return res.status(404).json({ message: 'Post not found' });
-  const data = { ...req.body };
-  if (req.file) data.coverImage = `/uploads/${req.file.filename}`;
-  if (typeof data.tags === 'string') data.tags = data.tags.split(',').map(t => t.trim());
-  Object.assign(post, data);
-  const updated = await post.save();
-  res.json(updated);
+  try {
+    const post = await BlogPost.findById(req.params.id);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+    const data = { ...req.body };
+    if (req.file) data.coverImage = `/uploads/${req.file.filename}`;
+    if (typeof data.tags === 'string') data.tags = data.tags.split(',').map(t => t.trim());
+
+    // Auto-generate slug and publishedAt if newly published
+    if (!data.slug && data.title) {
+      data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+    if ((data.published === 'true' || data.published === true) && !post.publishedAt) {
+      data.publishedAt = new Date();
+    }
+
+    Object.assign(post, data);
+    const updated = await post.save();
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const deletePost = async (req, res) => {

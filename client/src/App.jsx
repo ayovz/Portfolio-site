@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './index.css';
 import CardNav from './components/CardNav';
 import Hero from './components/Hero';
+import TechStrip from './components/TechStrip';
 import About from './components/About';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
@@ -14,8 +15,8 @@ import api from './api';
 const NAV_ITEMS = [
   {
     label: 'Work',
-    bgColor: 'rgba(99, 102, 241, 0.15)',
-    textColor: '#F8FAFC',
+    bgColor: 'rgba(0, 255, 255, 0.1)',
+    textColor: 'var(--aqua)',
     links: [
       { label: 'Projects', href: '#projects' },
       { label: 'Certifications', href: '#certifications' },
@@ -23,8 +24,8 @@ const NAV_ITEMS = [
   },
   {
     label: 'About',
-    bgColor: 'rgba(34, 211, 238, 0.1)',
-    textColor: '#F8FAFC',
+    bgColor: 'rgba(255, 105, 180, 0.1)',
+    textColor: 'var(--pink)',
     links: [
       { label: 'About Me', href: '#about' },
       { label: 'Blog', href: '#blog' },
@@ -32,14 +33,17 @@ const NAV_ITEMS = [
   },
   {
     label: 'Contact',
-    bgColor: 'rgba(16, 185, 129, 0.1)',
-    textColor: '#F8FAFC',
+    bgColor: 'rgba(255, 215, 0, 0.1)',
+    textColor: 'var(--gold)',
     links: [
       { label: 'Get in Touch', href: '#contact' },
       { label: 'Testimonials', href: '#testimonials' },
     ],
   },
 ];
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import BlogPostView from './components/BlogPostView';
 
 function App() {
   const [profile, setProfile] = useState(null);
@@ -67,19 +71,25 @@ function App() {
   }, []);
 
   return (
-    <>
+    <BrowserRouter>
       <CardNav logoText={profile?.name || 'Portfolio'} items={NAV_ITEMS} />
-      <main>
-        <Hero profile={profile} />
-        <About profile={profile} />
-        <Projects projects={projects} />
-        <Certifications certifications={certifications} />
-        <Testimonials testimonials={testimonials} />
-        <Blog posts={posts} />
-        <Contact profile={profile} />
-      </main>
+      <Routes>
+        <Route path="/" element={
+          <main>
+            <Hero profile={profile} />
+            <TechStrip techStrip={profile?.techStrip} />
+            <About profile={profile} />
+            <Projects projects={projects} />
+            <Certifications certifications={certifications} />
+            <Testimonials testimonials={testimonials} />
+            <Blog posts={posts} />
+            <Contact profile={profile} />
+          </main>
+        } />
+        <Route path="/blog/:slug" element={<BlogPostView />} />
+      </Routes>
       <Footer profile={profile} />
-    </>
+    </BrowserRouter>
   );
 }
 

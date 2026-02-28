@@ -15,6 +15,7 @@ const profileSchema = new mongoose.Schema({
     website: { type: String },
   },
   skills: [{ name: String, level: Number }],
+  techStrip: [{ type: String }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Profile', profileSchema);

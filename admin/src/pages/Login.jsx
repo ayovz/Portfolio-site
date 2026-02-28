@@ -59,7 +59,7 @@ const Login = ({ onLogin }) => {
           </button>
         </form>
 
-        <p className="login-hint">Default: admin / admin123</p>
+        <p className="login-hint">Hint: Check your server/.env file for credentials</p>
       </div>
     </div>
   );

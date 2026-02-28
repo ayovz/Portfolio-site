@@ -1,0 +1,55 @@
+.ticker-wrap {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  background: rgba(0, 255, 255, 0.03);
+  border-top: 1px solid rgba(0, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+  padding: 16px 0;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  white-space: nowrap;
+}
+
+.tech-strip-track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  animation: scrollMarquee 30s linear infinite;
+  padding-left: 48px;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
+}
+
+.tech-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tech-strip-separator {
+  color: var(--gold);
+  font-size: 10px;
+}
+
+.tech-strip-icon {
+  font-size: 18px;
+  color: var(--aqua);
+}
+
+.tech-strip-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--aqua);
+}
+
+.ticker-wrap:hover .tech-strip-track {
+  animation-play-state: paused;
+}

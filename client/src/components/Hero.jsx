@@ -3,6 +3,11 @@ import { FiArrowDown, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import ColorBends from './ColorBends';
 import './Hero.css';
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0 }
+};
+
 const Hero = ({ profile }) => {
   const scrollToProjects = () => {
     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -12,8 +17,7 @@ const Hero = ({ profile }) => {
   };
 
   return (
-    <section id="hero" className="hero-section">
-      {/* ColorBends WebGL background */}
+    <section id="hero" className="hero">
       <div className="hero-bg">
         <ColorBends
           colors={['#6366F1', '#22D3EE', '#0A0F1E', '#4F46E5', '#06B6D4', '#1E1B4B']}
@@ -28,104 +32,72 @@ const Hero = ({ profile }) => {
           autoRotate={1.5}
         />
       </div>
-
-      {/* Dark overlay for readability */}
       <div className="hero-overlay" />
 
-      <div className="container hero-content">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="hero-inner"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="hero-badge"
-          >
-            <span className="hero-badge-dot" />
-            Available for work
-          </motion.div>
+      <div className="orb orb1"></div>
+      <div className="orb orb2"></div>
+      <div className="orb orb3"></div>
+      <div className="corner-deco tl"></div>
+      <div className="corner-deco tr"></div>
 
-          <motion.h1
-            className="hero-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-          >
-            Hi, I'm{' '}
-            <span className="gradient-text">{profile?.name || 'Alex Morgan'}</span>
-          </motion.h1>
-
-          <motion.p
-            className="hero-tagline"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
-          >
-            {profile?.tagline || 'Full Stack Developer & UI/UX Enthusiast'}
-          </motion.p>
-
-          <motion.p
-            className="hero-bio"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-          >
-            I craft beautiful, performant web experiences that users love to interact with.
-          </motion.p>
-
-          <motion.div
-            className="hero-actions"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.7 }}
-          >
-            <button className="btn btn-primary" onClick={scrollToProjects}>
-              View My Work
-            </button>
-            <button className="btn btn-secondary" onClick={scrollToContact}>
-              Contact Me
-            </button>
-          </motion.div>
-
-          <motion.div
-            className="hero-socials"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.85, duration: 0.7 }}
-          >
-            {profile?.socials?.github && (
-              <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="GitHub">
-                <FiGithub />
-              </a>
-            )}
-            {profile?.socials?.linkedin && (
-              <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="LinkedIn">
-                <FiLinkedin />
-              </a>
-            )}
-            {profile?.socials?.twitter && (
-              <a href={profile.socials.twitter} target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="Twitter">
-                <FiTwitter />
-              </a>
-            )}
-          </motion.div>
-        </motion.div>
-      </div>
-
-      <motion.button
-        className="hero-scroll-btn"
-        onClick={scrollToProjects}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        aria-label="Scroll down"
+      <motion.div
+        className="hero-tag"
+        initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <FiArrowDown />
-      </motion.button>
+        // Initializing portfolio.exe ...
+      </motion.div>
+
+      <motion.h1 
+        className="hero-name"
+        initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        {profile?.name?.toUpperCase() || 'YOUR\nNAME'}
+      </motion.h1>
+
+      <motion.div 
+        className="hero-role"
+        initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 0.6 }}
+      >
+        {profile?.tagline || 'Full-Stack Developer'}
+      </motion.div>
+
+      <motion.p 
+        className="hero-desc"
+        initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 0.8 }}
+      >
+        {profile?.bio || 'I build fast, scalable, and beautiful software. Obsessed with clean architecture, great DX, and shipping things that actually matter.'}
+      </motion.p>
+
+      <motion.div 
+        className="hero-ctas"
+        initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 1 }}
+      >
+        <button className="btn btn-chrome" onClick={scrollToProjects}>VIEW WORK</button>
+        <button className="btn btn-outline" onClick={scrollToContact}>GET IN TOUCH</button>
+
+        <div className="hero-social-links" style={{ display: 'flex', gap: '1rem', marginLeft: 'auto', alignItems: 'center' }}>
+          {profile?.socials?.github && (
+            <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="hero-social-link"><FiGithub /></a>
+          )}
+          {profile?.socials?.linkedin && (
+            <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="hero-social-link"><FiLinkedin /></a>
+          )}
+          {profile?.socials?.twitter && (
+            <a href={profile.socials.twitter} target="_blank" rel="noopener noreferrer" className="hero-social-link"><FiTwitter /></a>
+          )}
+        </div>
+      </motion.div>
+
+      <motion.div 
+        className="terminal"
+        initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 1.2 }}
+      >
+        <div className="terminal-line"><span className="prompt">~/dev $</span> <span className="cmd">cat about.txt</span></div>
+        <div className="terminal-line"><span className="output">→ 5+ years building for the web</span></div>
+        <div className="terminal-line"><span className="output">→ Loves TypeScript, hates bugs</span></div>
+        <div className="terminal-line"><span className="output">→ Modern MERN Stack expert</span></div>
+        <div className="terminal-line"><span className="prompt">~/dev $</span> <span className="cursor"></span></div>
+      </motion.div>
     </section>
   );
 };

@@ -41,6 +41,7 @@ const seed = async () => {
         { name: 'UI/UX Design', level: 80 },
         { name: 'GraphQL', level: 75 },
       ],
+      techStrip: ['POSTGRESQL', 'DOCKER', 'AWS', 'GRAPHQL', 'NEXT.JS', 'REDIS', 'KUBERNETES', 'REACT', 'TYPESCRIPT'],
     });
     console.log('Profile seeded');
   }
