@@ -9,14 +9,23 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: [process.env.CLIENT_URL, process.env.ADMIN_URL],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    // Allow all vercel.app domains and localhosts
+    if (origin.endsWith('vercel.app') || origin.includes('localhost')) {
+      return callback(null, true);
+    }
+    // Check against strict env vars as fallback
+    if ([process.env.CLIENT_URL, process.env.ADMIN_URL].includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve uploaded images
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -27,10 +36,10 @@ app.use('/api/testimonials', require('./routes/testimonials'));
 app.use('/api/blog', require('./routes/blog'));
 app.use('/api/messages', require('./routes/messages'));
 
-// Upload route
+// Upload route (Cloudinary)
 app.post('/api/upload', require('./middleware/auth').protect, require('./middleware/upload').single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-  res.json({ url: `/uploads/${req.file.filename}` });
+  res.json({ url: req.file.path });
 });
 
 // Health check
