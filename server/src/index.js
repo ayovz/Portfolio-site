@@ -10,16 +10,15 @@ const app = express();
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    // Allow all vercel.app domains and localhosts
-    if (origin.endsWith('vercel.app') || origin.includes('localhost')) {
-      return callback(null, true);
+    
+    const allowedDomains = ['vercel.app', 'localhost', 'ayoweez.online'];
+    const isAllowed = allowedDomains.some(domain => origin.includes(domain));
+    
+    if (isAllowed) {
+      return callback(null, origin); // Echo the exact origin back for credentials: true
     }
-    // Check against strict env vars as fallback
-    if ([process.env.CLIENT_URL, process.env.ADMIN_URL].includes(origin)) {
-      return callback(null, true);
-    }
+    
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
