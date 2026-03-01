@@ -44,6 +44,7 @@ const NAV_ITEMS = [
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import BlogPostView from './components/BlogPostView';
+import ClickSpark from './components/ClickSpark';
 
 function App() {
   const [profile, setProfile] = useState(null);
@@ -76,14 +77,22 @@ function App() {
       <Routes>
         <Route path="/" element={
           <main>
-            <Hero profile={profile} />
-            <TechStrip techStrip={profile?.techStrip} />
-            <About profile={profile} />
-            <Projects projects={projects} />
-            <Certifications certifications={certifications} />
-            <Testimonials testimonials={testimonials} />
-            <Blog posts={posts} />
-            <Contact profile={profile} />
+            <ClickSpark
+              sparkColor='#fff'
+              sparkSize={17}
+              sparkRadius={15}
+              sparkCount={8}
+              duration={300}
+            >
+              <Hero profile={profile} />
+              <TechStrip techStrip={profile?.techStrip} />
+              <About profile={profile} />
+              <Projects projects={projects} />
+              <Certifications certifications={certifications} />
+              <Testimonials testimonials={testimonials} />
+              <Blog posts={posts} />
+              <Contact profile={profile} />
+            </ClickSpark>
           </main>
         } />
         <Route path="/blog/:slug" element={<BlogPostView />} />

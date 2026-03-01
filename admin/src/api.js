@@ -14,13 +14,20 @@ const request = async (path, options = {}) => {
     ...options,
   });
 
-  if (res.status === 401) {
+  if (res.status === 401 && path !== '/auth/login') {
     localStorage.removeItem('admin_token');
     window.location.href = '/login';
     return;
   }
-  if (!res.ok) throw new Error((await res.json()).message || 'API error');
-  return res.json();
+
+  const data = await res.json();
+  if (!res.ok) {
+    if (path === '/auth/login' && res.status === 401) {
+      throw new Error(data.message || 'Invalid credentials');
+    }
+    throw new Error(data.message || 'API error');
+  }
+  return data;
 };
 
 const formReq = (path, method, formData) =>

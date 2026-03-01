@@ -20,16 +20,18 @@ const Hero = ({ profile }) => {
     <section id="hero" className="hero">
       <div className="hero-bg">
         <ColorBends
-          colors={['#6366F1', '#22D3EE', '#0A0F1E', '#4F46E5', '#06B6D4', '#1E1B4B']}
-          speed={0.15}
-          warpStrength={1.2}
-          frequency={0.8}
-          mouseInfluence={0.6}
-          parallax={0.3}
-          noise={0.05}
-          transparent={false}
-          rotation={35}
-          autoRotate={1.5}
+          colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+          rotation={0}
+          speed={0.2}
+          scale={1}
+          frequency={1}
+          warpStrength={1}
+          mouseInfluence={1}
+          parallax={0.5}
+          noise={0.1}
+          transparent
+          autoRotate={0}
+          color=""
         />
       </div>
       <div className="hero-overlay" />

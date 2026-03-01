@@ -7,14 +7,21 @@ const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.admin = await Admin.findById(decoded.id).select('-password');
-      next();
+      
+      if (decoded.id === 'admin_env_bypass') {
+        req.admin = { _id: 'admin_env_bypass', username: process.env.ADMIN_USERNAME || 'admin' };
+      } else {
+        req.admin = await Admin.findById(decoded.id).select('-password');
+      }
+      
+      return next();
     } catch (error) {
-      res.status(401).json({ message: 'Not authorized, token failed' });
+      return res.status(401).json({ message: 'Not authorized, token failed' });
     }
   }
+  
   if (!token) {
-    res.status(401).json({ message: 'Not authorized, no token' });
+    return res.status(401).json({ message: 'Not authorized, no token' });
   }
 };
 

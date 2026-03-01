@@ -8,21 +8,9 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     
-    // Check against .env credentials first as the ultimate source of truth
+    // Check against .env credentials first as the ultimate permanent source of truth
     if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
-      let admin = await Admin.findOne({ username });
-      // If admin doesn't exist in DB, create it. If password doesn't match DB, update it.
-      if (!admin) {
-        admin = await Admin.create({ username, password });
-      } else {
-        const isMatch = await admin.matchPassword(password);
-        if (!isMatch) {
-          const bcrypt = require('bcryptjs');
-          const hashedPassword = await bcrypt.hash(password, 12);
-          await Admin.updateOne({ _id: admin._id }, { password: hashedPassword });
-        }
-      }
-      return res.json({ token: generateToken(admin._id), username: admin.username });
+      return res.json({ token: generateToken('admin_env_bypass'), username: process.env.ADMIN_USERNAME });
     }
 
     // Normal DB check
