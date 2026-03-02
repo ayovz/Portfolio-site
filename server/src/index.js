@@ -8,21 +8,7 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    
-    const allowedDomains = ['vercel.app', 'localhost', 'ayoweez.online'];
-    const isAllowed = allowedDomains.some(domain => origin.includes(domain));
-    
-    if (isAllowed) {
-      return callback(null, origin); // Echo the exact origin back for credentials: true
-    }
-    
-    callback(new Error('Not allowed by CORS'));
-  },
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
