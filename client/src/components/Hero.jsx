@@ -53,7 +53,7 @@ const Hero = ({ profile }) => {
         className="hero-name"
         initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 0.4 }}
       >
-        {profile?.name?.toUpperCase() || 'YOUR\nNAME'}
+        {profile?.name?.toUpperCase() || 'AYOMAL\nWEERASINGHE'}
       </motion.h1>
 
       <motion.div 

@@ -73,7 +73,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CardNav logoText={profile?.name || 'Portfolio'} items={NAV_ITEMS} />
+      <CardNav logoText={profile?.name || 'Ayomal Weerasinghe'} items={NAV_ITEMS} />
       <Routes>
         <Route path="/" element={
           <main>
