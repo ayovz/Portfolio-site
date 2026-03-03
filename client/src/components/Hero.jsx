@@ -77,6 +77,7 @@ const Hero = ({ profile }) => {
               overflow: 'hidden',
               textShadow: '0 0 10px rgba(0, 255, 209, 0.4)'
             }}
+            
 
             staggerFrom={"last"}
             initial={{ y: "100%" }}
