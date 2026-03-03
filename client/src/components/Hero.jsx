@@ -66,8 +66,17 @@ const Hero = ({ profile }) => {
         {profile?.roles?.length > 0 ? (
           <RotatingText
             texts={profile.roles}
-            mainClassName="px-2 sm:px-2 md:px-3 text-cyan-300 py-0.5 sm:py-1 md:py-2 justify-center rounded-lg inline-flex"
-            style={{ backgroundColor: '#00c8ffff', color: '#0a0f1e', overflow: 'hidden' }}
+            mainClassName="px-3 sm:px-4 md:px-5 py-0.5 sm:py-1 md:py-2 justify-center rounded-xl inline-flex"
+            style={{ 
+              background: 'rgba(0, 255, 209, 0.08)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(0, 255, 209, 0.3)',
+              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 255, 209, 0.1)',
+              color: '#ffffff',
+              overflow: 'hidden',
+              textShadow: '0 0 10px rgba(0, 255, 209, 0.4)'
+            }}
 
             staggerFrom={"last"}
             initial={{ y: "100%" }}
