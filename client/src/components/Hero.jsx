@@ -60,22 +60,26 @@ const Hero = ({ profile }) => {
       <motion.div 
         className="hero-role"
         initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 0.6 }}
+        style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}
       >
+        <span>I'M A&nbsp;</span>
         {profile?.roles?.length > 0 ? (
           <RotatingText
             texts={profile.roles}
-            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            mainClassName="px-2 sm:px-2 md:px-3 text-cyan-300 py-0.5 sm:py-1 md:py-2 justify-center rounded-lg inline-flex"
+            style={{ backgroundColor: '#00c8ffff', color: '#0a0f1e', overflow: 'hidden' }}
+
             staggerFrom={"last"}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "-120%" }}
             staggerDuration={0.025}
-            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            splitLevelClassName="pb-0.5 sm:pb-1 md:pb-1"
             transition={{ type: "spring", damping: 30, stiffness: 400 }}
             rotationInterval={2000}
           />
         ) : (
-          profile?.tagline || 'Full-Stack Developer'
+          <span>{profile?.tagline || 'Full-Stack Developer'}</span>
         )}
       </motion.div>
 

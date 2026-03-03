@@ -1,8 +1,9 @@
 .text-rotate {
   display: flex;
-  flex-wrap: wrap;
   white-space: pre-wrap;
   position: relative;
+  overflow: visible;
+  line-height: inherit;
 }
 
 .text-rotate-sr-only {
@@ -17,18 +18,22 @@
   border: 0;
 }
 
-.text-rotate-word {
-  display: inline-flex;
-}
-
 .text-rotate-lines {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
+.text-rotate-word {
+  display: inline-flex;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: inherit;
+}
+
 .text-rotate-element {
   display: inline-block;
+  white-space: pre;
 }
 
 .text-rotate-space {
