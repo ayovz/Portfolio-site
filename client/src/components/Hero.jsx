@@ -77,7 +77,7 @@ const Hero = ({ profile }) => {
               overflow: 'hidden',
               textShadow: '0 0 10px rgba(0, 255, 209, 0.4)'
             }}
-            
+
 
             staggerFrom={"last"}
             initial={{ y: "100%" }}
@@ -86,7 +86,7 @@ const Hero = ({ profile }) => {
             staggerDuration={0.025}
             splitLevelClassName="pb-0.5 sm:pb-1 md:pb-1"
             transition={{ type: "spring", damping: 30, stiffness: 400 }}
-            rotationInterval={2000}
+            rotationInterval={3000}
           />
         ) : (
           <span>{profile?.tagline || 'Full-Stack Developer'}</span>
