@@ -10,6 +10,7 @@ export default function Profile() {
   const [currentAvatar, setCurrentAvatar] = useState(null);
   const [skills, setSkills] = useState([]);
   const [techStrip, setTechStrip] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
@@ -25,6 +26,7 @@ export default function Profile() {
       setCurrentAvatar(p.avatar);
       setSkills(p.skills || []);
       setTechStrip(p.techStrip || []);
+      setRoles(p.roles || []);
     });
   }, []);
 
@@ -41,6 +43,7 @@ export default function Profile() {
     fd.append('socials', JSON.stringify({ github: form.github, linkedin: form.linkedin, twitter: form.twitter, instagram: form.instagram }));
     fd.append('skills', JSON.stringify(skills));
     fd.append('techStrip', JSON.stringify(techStrip.filter(t => t.trim() !== '')));
+    fd.append('roles', JSON.stringify(roles.filter(r => r.trim() !== '')));
     if (avatarFile) fd.append('avatar', avatarFile);
     try {
       await adminApi.updateProfile(fd);
@@ -82,6 +85,23 @@ export default function Profile() {
             <div className="form-group"><label className="form-label">LinkedIn URL</label><input className="form-input" type="url" {...f('linkedin')} /></div>
             <div className="form-group"><label className="form-label">Twitter URL</label><input className="form-input" type="url" {...f('twitter')} /></div>
             <div className="form-group"><label className="form-label">Instagram URL</label><input className="form-input" type="url" {...f('instagram')} /></div>
+          </div>
+        </div>
+
+        {/* Hero Tagline Roles */}
+        <div className="panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+            <h3 className="panel-title">Hero Tagline Roles</h3>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setRoles(r => [...r, ''])}>+ Add Role</button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
+            {roles.map((r, i) => (
+              <div key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                <input className="form-input" placeholder="e.g. React Developer" value={r} onChange={e => setRoles(rs => rs.map((val, idx) => idx === i ? e.target.value : val))} style={{ flex: 1 }} />
+                <button type="button" className="btn btn-danger btn-sm" onClick={() => setRoles(rs => rs.filter((_, idx) => idx !== i))}>✕</button>
+              </div>
+            ))}
+            {!roles.length && <p style={{ color: 'var(--text-2)', fontSize: '0.85rem' }}>No roles added.</p>}
           </div>
         </div>
 

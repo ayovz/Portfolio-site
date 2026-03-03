@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const profileSchema = new mongoose.Schema({
   name: { type: String, default: 'Your Name' },
   tagline: { type: String, default: 'Full Stack Developer' },
+  roles: [{ type: String }],
   bio: { type: String, default: 'A passionate developer building amazing things.' },
   avatar: { type: String },
   resumeUrl: { type: String },

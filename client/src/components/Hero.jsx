@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FiArrowDown, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import ColorBends from './ColorBends';
+import RotatingText from './RotatingText';
 import './Hero.css';
 
 const fadeUp = {
@@ -60,7 +61,22 @@ const Hero = ({ profile }) => {
         className="hero-role"
         initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.8, delay: 0.6 }}
       >
-        {profile?.tagline || 'Full-Stack Developer'}
+        {profile?.roles?.length > 0 ? (
+          <RotatingText
+            texts={profile.roles}
+            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            staggerFrom={"last"}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
+        ) : (
+          profile?.tagline || 'Full-Stack Developer'
+        )}
       </motion.div>
 
       <motion.p 
