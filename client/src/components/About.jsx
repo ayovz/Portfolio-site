@@ -54,10 +54,6 @@ const About = ({ profile }) => {
       </div>
 
       <div style={{ marginTop: '4rem' }}>
-        <p className="section-subtitle" style={{ marginTop: 0 }}>
-          {profile?.bio || 'I am a full-stack developer with a passion for crafting beautiful, performant web applications.'}
-        </p>
-        
         {profile?.resumeUrl && (
           <motion.a
             href={profile.resumeUrl}
