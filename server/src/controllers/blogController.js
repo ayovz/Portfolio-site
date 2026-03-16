@@ -18,7 +18,7 @@ const getPostBySlug = async (req, res) => {
 const createPost = async (req, res) => {
   try {
     const data = { ...req.body };
-    if (req.file) data.coverImage = `/uploads/${req.file.filename}`;
+    if (req.file) data.coverImage = req.file.path;
     if (typeof data.tags === 'string') data.tags = data.tags.split(',').map(t => t.trim());
     
     // Auto-generate slug and publishedAt
@@ -41,7 +41,7 @@ const updatePost = async (req, res) => {
     const post = await BlogPost.findById(req.params.id);
     if (!post) return res.status(404).json({ message: 'Post not found' });
     const data = { ...req.body };
-    if (req.file) data.coverImage = `/uploads/${req.file.filename}`;
+    if (req.file) data.coverImage = req.file.path;
     if (typeof data.tags === 'string') data.tags = data.tags.split(',').map(t => t.trim());
 
     // Auto-generate slug and publishedAt if newly published

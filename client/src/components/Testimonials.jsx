@@ -45,7 +45,7 @@ const Testimonials = ({ testimonials = [] }) => {
             <div className="testimonial-author">
               <div className="testimonial-avatar">
                 {t.avatar ? (
-                  <img src={`${API_BASE}${t.avatar}`} alt={t.name} loading="lazy" />
+                  <img src={t.avatar.startsWith('http') ? t.avatar : `${API_BASE}${t.avatar}`} alt={t.name} loading="lazy" />
                 ) : (
                   <span>{t.name.charAt(0)}</span>
                 )}

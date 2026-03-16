@@ -22,7 +22,7 @@ const ProjectCard = ({ project, index }) => (
     
     {project.image && (
       <div style={{ margin: '16px 0', border: '1px solid rgba(0,255,255,0.2)' }}>
-        <img src={`${API_BASE}${project.image}`} alt={project.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} loading="lazy" />
+        <img src={project.image.startsWith('http') ? project.image : `${API_BASE}${project.image}`} alt={project.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} loading="lazy" />
       </div>
     )}
     

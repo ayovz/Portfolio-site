@@ -67,7 +67,7 @@ export default function Profile() {
             <h3 className="panel-title" style={{ marginBottom: '1.25rem' }}>Basic Information</h3>
             {currentAvatar && !avatarFile && (
               <div style={{ marginBottom: '1rem' }}>
-                <img src={`${API_BASE}${currentAvatar}`} alt="Avatar" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
+                <img src={currentAvatar.startsWith('http') ? currentAvatar : `${API_BASE}${currentAvatar}`} alt="Avatar" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
               </div>
             )}
             <div className="form-group"><label className="form-label">Avatar Image</label><input className="form-input" type="file" accept="image/*" onChange={e => setAvatarFile(e.target.files[0])} /></div>

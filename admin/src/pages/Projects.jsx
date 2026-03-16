@@ -64,7 +64,7 @@ export default function Projects() {
             <tbody>
               {items.map(p => (
                 <tr key={p._id}>
-                  <td>{p.image ? <img src={`${API_BASE}${p.image}`} className="img-preview" alt={p.title} /> : '—'}</td>
+                  <td>{p.image ? <img src={p.image.startsWith('http') ? p.image : `${API_BASE}${p.image}`} className="img-preview" alt={p.title} /> : '—'}</td>
                   <td><span className="truncate">{p.title}</span></td>
                   <td><span className="badge badge-blue">{p.category}</span></td>
                   <td style={{ fontSize: '0.8rem', color: 'var(--text-2)' }}>{p.tech?.slice(0,3).join(', ')}</td>

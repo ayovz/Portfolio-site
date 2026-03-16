@@ -28,7 +28,7 @@ const Certifications = ({ certifications = [] }) => {
             <div className="cert-left">
               <div className="cert-icon-wrap">
                 {cert.image ? (
-                  <img src={`${API_BASE}${cert.image}`} alt={cert.issuer} className="cert-logo" loading="lazy" />
+                  <img src={cert.image.startsWith('http') ? cert.image : `${API_BASE}${cert.image}`} alt={cert.issuer} className="cert-logo" loading="lazy" />
                 ) : (
                   <FiAward className="cert-fallback" />
                 )}

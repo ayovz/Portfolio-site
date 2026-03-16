@@ -7,7 +7,7 @@ const getTestimonials = async (req, res) => {
 
 const createTestimonial = async (req, res) => {
   const data = { ...req.body };
-  if (req.file) data.avatar = `/uploads/${req.file.filename}`;
+  if (req.file) data.avatar = req.file.path;
   const t = await Testimonial.create(data);
   res.status(201).json(t);
 };
@@ -16,7 +16,7 @@ const updateTestimonial = async (req, res) => {
   const t = await Testimonial.findById(req.params.id);
   if (!t) return res.status(404).json({ message: 'Testimonial not found' });
   const data = { ...req.body };
-  if (req.file) data.avatar = `/uploads/${req.file.filename}`;
+  if (req.file) data.avatar = req.file.path;
   Object.assign(t, data);
   const updated = await t.save();
   res.json(updated);

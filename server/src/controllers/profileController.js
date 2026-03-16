@@ -10,7 +10,7 @@ const updateProfile = async (req, res) => {
   let profile = await Profile.findOne();
   if (!profile) profile = new Profile();
   const data = { ...req.body };
-  if (req.file) data.avatar = `/uploads/${req.file.filename}`;
+  if (req.file) data.avatar = req.file.path;
   if (typeof data.skills === 'string') data.skills = JSON.parse(data.skills);
   if (typeof data.roles === 'string') data.roles = JSON.parse(data.roles);
   if (typeof data.socials === 'string') data.socials = JSON.parse(data.socials);

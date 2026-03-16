@@ -30,7 +30,7 @@ const Blog = ({ posts = [] }) => {
           >
             {post.coverImage && (
               <div className="blog-cover">
-                <img src={`${API_BASE}${post.coverImage}`} alt={post.title} loading="lazy" />
+                <img src={post.coverImage.startsWith('http') ? post.coverImage : `${API_BASE}${post.coverImage}`} alt={post.title} loading="lazy" />
               </div>
             )}
             <div className="blog-body">

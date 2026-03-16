@@ -7,7 +7,7 @@ const getCertifications = async (req, res) => {
 
 const createCertification = async (req, res) => {
   const data = { ...req.body };
-  if (req.file) data.image = `/uploads/${req.file.filename}`;
+  if (req.file) data.image = req.file.path;
   const cert = await Certification.create(data);
   res.status(201).json(cert);
 };
@@ -16,7 +16,7 @@ const updateCertification = async (req, res) => {
   const cert = await Certification.findById(req.params.id);
   if (!cert) return res.status(404).json({ message: 'Certification not found' });
   const data = { ...req.body };
-  if (req.file) data.image = `/uploads/${req.file.filename}`;
+  if (req.file) data.image = req.file.path;
   Object.assign(cert, data);
   const updated = await cert.save();
   res.json(updated);

@@ -57,7 +57,7 @@ export default function Certifications() {
             <tbody>
               {items.map(c => (
                 <tr key={c._id}>
-                  <td>{c.image ? <img src={`${API_BASE}${c.image}`} className="img-preview" alt={c.issuer} /> : '—'}</td>
+                  <td>{c.image ? <img src={c.image.startsWith('http') ? c.image : `${API_BASE}${c.image}`} className="img-preview" alt={c.issuer} /> : '—'}</td>
                   <td><span className="truncate" style={{ maxWidth: 180 }}>{c.title}</span></td>
                   <td style={{ color: 'var(--text-2)', fontSize: '0.85rem' }}>{c.issuer}</td>
                   <td><span className="badge badge-blue">{c.category}</span></td>

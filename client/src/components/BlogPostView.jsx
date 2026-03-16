@@ -65,7 +65,7 @@ export default function BlogPostView() {
 
       {post.coverImage && (
         <div className="blog-view-cover">
-          <img src={`${API_BASE}${post.coverImage}`} alt={post.title} />
+          <img src={post.coverImage.startsWith('http') ? post.coverImage : `${API_BASE}${post.coverImage}`} alt={post.title} />
         </div>
       )}
 
