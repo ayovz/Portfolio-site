@@ -3,7 +3,7 @@ import { FiPlus, FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
 import adminApi from '../api';
 
 const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
-const CATS = ['Web App', 'Mobile', 'API', 'UI/UX', 'AI/ML', 'Other'];
+const CATS = ['Web App', 'Mobile', 'API', 'UI/UX', 'AI/ML', 'Cloud Computing', 'Other'];
 
 const emptyForm = { title: '', description: '', shortDescription: '', tech: '', liveUrl: '', repoUrl: '', category: 'Web App', featured: false, order: 0 };
 
