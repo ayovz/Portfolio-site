@@ -54,19 +54,18 @@ const About = ({ profile }) => {
       </div>
 
       <div style={{ marginTop: '4rem' }}>
-        {profile?.resumeUrl && (
-          <motion.a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-chrome"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FiDownload /> Download Resume
-          </motion.a>
-        )}
+        <motion.a
+          href={profile?.resumeUrl || '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-chrome"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          style={{ display: profile?.resumeUrl ? 'inline-flex' : 'none' }}
+        >
+          <FiDownload /> Download Resume
+        </motion.a>
       </div>
     </section>
   );
